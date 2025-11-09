@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Learning Platform Database Schema",
+  "description": "Фізична схема бази даних навчальної платформи з інтеграцією Udemy",
+  "type": "object",
+  "properties": {
+    "user": {
+      "type": "object",
+      "description": "Інформація про користувача платформи",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Повне ім'я користувача",
+          "minLength": 2,
+          "maxLength": 50,
+          "pattern": "^[\\p{L}]+(\\s[\\p{L}]+)*$"
+        },
+        "email": {
+          "type": "string",
+          "description": "Електронна адреса користувача",
+          "format": "email"
+        },
+        "level": {
+          "type": "integer",
+          "description": "Рівень користувача за прогресом навчання",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "interests": {
+          "type": "array",
+          "description": "Список інтересів користувача",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "planLearning": {
+          "type": "object",
+          "description": "Персональний план навчання користувача",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "Назва навчального плану",
+              "minLength": 3
+            },
+            "duration": {
+              "type": "integer",
+              "description": "Тривалість навчання у годинах",
+              "minimum": 1
+            },
+            "courseCount": {
+              "type": "integer",
+              "description": "Кількість курсів у плані",
+              "minimum": 1
+            },
+            "courses": {
+              "type": "array",
+              "description": "Список курсів у навчальному плані",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 100
+                  },
+                  "category": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 50
+                  },
+                  "difficulty": {
+                    "type": "string",
+                    "enum": ["Beginner", "Intermediate", "Advanced"]
+                  },
+                  "rating": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 5
+                  }
+                },
+                "required": ["title", "category", "difficulty", "rating"]
+              },
+              "minItems": 1
+            }
+          },
+          "required": ["title", "duration", "courseCount", "courses"]
+        },
+        "community": {
+          "type": "object",
+          "description": "Інформація про спільноту користувачів",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Назва спільноти"
+            },
+            "description": {
+              "type": "string",
+              "description": "Опис спільноти"
+            },
+            "memberLevel": {
+              "type": "string",
+              "description": "Рівень участі користувача в спільноті"
+            }
+          },
+          "required": ["name", "description", "memberLevel"]
+        }
+      },
+      "required": ["name", "email", "level", "interests", "planLearning", "community"]
+    },
+    "udemyPlatform": {
+      "type": "object",
+      "description": "Дані інтеграції з платформою Udemy",
+      "properties": {
+        "apiInterface": {
+          "type": "string",
+          "description": "Посилання на API Udemy",
+          "pattern": "^https://api\\.udemy\\.com/.*"
+        },
+        "courseList": {
+          "type": "array",
+          "description": "Список курсів, отриманих з Udemy",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": { "type": "string", "minLength": 3 },
+              "category": { "type": "string", "minLength": 3 },
+              "difficulty": {
+                "type": "string",
+                "enum": ["Beginner", "Intermediate", "Advanced"]
+              },
+              "rating": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 5
+              }
+            },
+            "required": ["title", "category", "difficulty", "rating"]
+          },
+          "minItems": 1
+        }
+      },
+      "required": ["apiInterface", "courseList"]
+    }
+  },
+  "required": ["user", "udemyPlatform"]
+}
