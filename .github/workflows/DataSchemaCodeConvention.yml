@@ -1,0 +1,24 @@
+name: JSON Code Convention Check
+
+on:
+  push:
+    branches:
+      - main   # або 'LWI1' чи інша твоя гілка
+
+jobs:
+  json_linter_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install JSON Linter
+        run: |
+          npm install -g @prantlf/jsonlint
+
+      - name: Validate JSON Schema formatting
+        run: |
+          jsonlint DataSchema.json
+          echo "✅ DataSchema.json passed validation"
+
