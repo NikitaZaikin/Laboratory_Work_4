@@ -1,0 +1,43 @@
+{
+  "user": {
+    "name": "Іван Петренко",
+    "email": "ivan.petrenko@example.com",
+    "level": 2,
+    "interests": ["programming", "design"],
+    "planLearning": {
+      "title": "Frontend Development",
+      "duration": 120,
+      "courseCount": 3,
+      "courses": [
+        {
+          "title": "React Basics",
+          "category": "Web Development",
+          "difficulty": "Beginner",
+          "rating": 4.8
+        },
+        {
+          "title": "Advanced CSS",
+          "category": "Design",
+          "difficulty": "Intermediate",
+          "rating": 4.5
+        }
+      ]
+    },
+    "community": {
+      "name": "Web Learners",
+      "description": "Community of students learning web technologies",
+      "memberLevel": "Intermediate"
+    }
+  },
+  "udemyPlatform": {
+    "apiInterface": "https://api.udemy.com/v1/courses",
+    "courseList": [
+      {
+        "title": "Python for Beginners",
+        "category": "Programming",
+        "difficulty": "Beginner",
+        "rating": 4.7
+      }
+    ]
+  }
+}
