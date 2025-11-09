@@ -17,4 +17,4 @@ jobs:
 
       - name: Run code style & syntax validation
         run: |
-          npx @biomejs/biome check ProgramCode/*.js
+          npx @biomejs/biome check *.js
