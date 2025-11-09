@@ -5,17 +5,19 @@ on:
     branches: [ main ]
 
 jobs:
-  JavaScriptCodeLister:
+  JavaScriptCodeLinter:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Install Biome (JS linter & formatter)
-        run: |
-          npm install --save-dev --save-exact @biomejs/biome
+        run: npm i -g @biomejs/biome
 
-      - name: Run Biome code style check
-        run: |
-          npx @biomejs/biome check ./app.js
+      # 1) Автоформат (виправляє стилі у файлі)
+      - name: Format with Biome (write changes)
+        run: biome format --write ./ProgramCodeModified.js
+
+      # 2) Лінт (перевірка правил; якщо є реальні помилки — впаде)
+      - name: Lint with Biome
+        run: biome lint ./ProgramCodeModified.js
