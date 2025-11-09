@@ -78,7 +78,7 @@
                     "maximum": 5
                   }
                 },
-                "required": ["title", "category", "difficulty", "rating"]
+                "required": ["title", "category", "difficulty", "rating",]
               },
               "minItems": 1
             }
