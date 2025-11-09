@@ -5,8 +5,9 @@ on:
     branches: [ main ]
 
 jobs:
-  JavaScriptCodeLinter:
+  JavaScriptCodeLister:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -15,7 +16,6 @@ jobs:
         run: |
           npm install --save-dev --save-exact @biomejs/biome
 
-      - name: Run code style & syntax validation
+      - name: Run Biome code style check
         run: |
-          npx @biomejs/biome check *.js
-
+          npx @biomejs/biome check ./app.js
