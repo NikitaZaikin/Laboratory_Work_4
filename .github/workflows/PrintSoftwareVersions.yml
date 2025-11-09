@@ -2,6 +2,8 @@ name: Print Software and Database Versions
 
 on:
   push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -26,12 +28,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install MongoDB Shell
+      - name: Install MongoDB Shell (mongosh) via Snap
         run: |
-          wget -qO - https://pgp.mongodb.com/server-6.0.asc | sudo apt-key add -
-          echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.com/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
-          sudo apt-get update
-          sudo apt-get install -y mongodb-mongosh
+          sudo snap install mongosh --edge --devmode
 
-      - name: Check MongoDB shell version
+      - name: Check MongoDB Shell version
         run: mongosh --version
