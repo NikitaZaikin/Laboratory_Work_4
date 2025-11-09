@@ -16,8 +16,8 @@ jobs:
 
       # 1) Автоформат (виправляє стилі у файлі)
       - name: Format with Biome (write changes)
-        run: biome format --write ./ProgramCodeModified.js
+        run: biome format --write ./*.js
 
       # 2) Лінт (перевірка правил; якщо є реальні помилки — впаде)
       - name: Lint with Biome
-        run: biome lint ./ProgramCodeModified.js
+        run: biome lint ./*.js
